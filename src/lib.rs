@@ -1,8 +1,11 @@
+mod error;
 mod panic;
 mod traits;
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
+
+pub use crate::{error::Error, traits::Diagnostic};
 
 /// Default severity for diagnostics is `Severity::Error`.
 #[derive(Copy, Clone, Debug, Eq, PartialOrd, PartialEq, Ord)]

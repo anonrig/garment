@@ -1,12 +1,14 @@
-use garment::{Diagnostic, Error};
+use garment::{Diagnostic, Report};
 
-fn get_error() -> Error {
-    use thiserror::Error;
-    #[derive(Error, Debug)]
-    #[error("TestError")]
-    struct TestError;
-    impl Diagnostic for TestError {}
-    Error::new(TestError)
+use thiserror::Error;
+#[derive(Error, Debug)]
+#[error("TestError")]
+struct TestError;
+impl Diagnostic for TestError {}
+
+fn get_error() -> Report<TestError> {
+    let test_error = TestError;
+    Report::new(test_error)
 }
 
 #[test]
@@ -18,7 +20,7 @@ fn display() {
 #[test]
 fn debug() {
     let error = get_error();
-    assert_eq!(format!("{error:?}"), "TODO: fmt::Error")
+    assert_eq!(format!("{error:?}"), "TODO: fmt::Debug")
 }
 
 #[test]

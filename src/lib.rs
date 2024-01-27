@@ -1,11 +1,16 @@
-mod error;
+mod diagnostic;
+mod graphical_report_handler;
 mod panic;
-mod traits;
+mod report;
+mod report_handler;
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-pub use crate::{error::Error, traits::Diagnostic};
+pub use crate::{
+    diagnostic::Diagnostic, graphical_report_handler::GraphicalReportHandler, report::Report,
+    report_handler::ReportHandler,
+};
 
 /// Default severity for diagnostics is `Severity::Error`.
 #[derive(Copy, Clone, Debug, Eq, PartialOrd, PartialEq, Ord)]

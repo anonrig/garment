@@ -1,16 +1,24 @@
+mod debug_report_handler;
 mod diagnostic;
 mod graphical_report_handler;
+mod labeled_source_span;
 mod panic;
 mod report;
 mod report_handler;
+mod source_offset;
+mod source_span;
 
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
 pub use crate::{
-    diagnostic::Diagnostic, graphical_report_handler::GraphicalReportHandler, report::Report,
-    report_handler::ReportHandler,
+    debug_report_handler::DebugReportHandler, diagnostic::Diagnostic,
+    graphical_report_handler::GraphicalReportHandler, labeled_source_span::LabeledSourceSpan,
+    report::Report, report_handler::ReportHandler, source_offset::SourceOffset,
+    source_span::SourceSpan,
 };
+
+pub type ByteOffset = usize;
 
 /// Default severity for diagnostics is `Severity::Error`.
 #[derive(Copy, Clone, Debug, Eq, PartialOrd, PartialEq, Ord)]
@@ -51,25 +59,3 @@ fn test_deserialize_severity() {
     let severity: Severity = serde_json::from_value(json!("Error")).unwrap();
     assert_eq!(severity, Severity::Error);
 }
-
-/// A span with an optional label.
-#[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct LabeledSourceSpan {
-    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Option::is_none"))]
-    label: Option<String>,
-    span: SourceSpan,
-}
-
-/// Represents the start and length of the span.
-#[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct SourceSpan {
-    offset: SourceOffset,
-    length: usize,
-}
-
-/// Represents the offset from the beginning.
-#[derive(Debug, Clone, PartialEq, Eq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct SourceOffset(usize);

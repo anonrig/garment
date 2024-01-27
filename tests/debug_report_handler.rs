@@ -14,7 +14,7 @@ fn test() {
     #[error("TestError")]
     struct TestError {
         source: SourceError,
-    };
+    }
 
     impl Diagnostic for TestError {
         fn code<'a>(&'a self) -> Option<Box<dyn Display + 'a>> {

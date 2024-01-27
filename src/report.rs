@@ -1,12 +1,14 @@
 use std::fmt;
 
-use crate::diagnostic::Diagnostic;
+use crate::{Diagnostic, SourceCode};
 
 /// An error reporter.
 ///
 /// API taken from [std::error::Report](https://doc.rust-lang.org/std/error/struct.Report.html).
 pub struct Report<D = Box<dyn Diagnostic>> {
     diagnostic: D,
+
+    source_code: Option<Box<dyn SourceCode>>,
 }
 
 impl<D> Report<D>
@@ -16,6 +18,12 @@ where
     pub fn new(error: D) -> Report<D> {
         Self::from(error)
     }
+
+    /// Provide source code for this error
+    pub fn with_source_code(mut self, source_code: impl SourceCode + 'static) -> Self {
+        self.source_code.replace(Box::new(source_code));
+        self
+    }
 }
 
 impl<D> From<D> for Report<D>
@@ -23,7 +31,7 @@ where
     D: Diagnostic,
 {
     fn from(error: D) -> Self {
-        Self { diagnostic: error }
+        Self { diagnostic: error, source_code: None }
     }
 }
 

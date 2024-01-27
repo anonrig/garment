@@ -15,3 +15,9 @@ impl SourceOffset {
         self.0
     }
 }
+
+impl From<ByteOffset> for SourceOffset {
+    fn from(bytes: ByteOffset) -> Self {
+        SourceOffset(bytes)
+    }
+}

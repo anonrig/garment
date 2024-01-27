@@ -1,4 +1,4 @@
-use crate::source_offset::SourceOffset;
+use crate::{ByteOffset, SourceOffset};
 
 /// Represents the start and length of the span.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -11,5 +11,11 @@ pub struct SourceSpan {
 impl SourceSpan {
     pub const fn new(start: SourceOffset, length: SourceOffset) -> Self {
         Self { offset: start, length: length.offset() }
+    }
+}
+
+impl From<(ByteOffset, usize)> for SourceSpan {
+    fn from((start, len): (ByteOffset, usize)) -> Self {
+        Self { offset: SourceOffset::from(start), length: len }
     }
 }

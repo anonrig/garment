@@ -2,9 +2,11 @@ mod debug_report_handler;
 mod diagnostic;
 mod graphical_report_handler;
 mod labeled_source_span;
+mod named_source;
 mod panic;
 mod report;
 mod report_handler;
+mod source_code;
 mod source_offset;
 mod source_span;
 
@@ -14,8 +16,8 @@ use serde::{Deserialize, Serialize};
 pub use crate::{
     debug_report_handler::DebugReportHandler, diagnostic::Diagnostic,
     graphical_report_handler::GraphicalReportHandler, labeled_source_span::LabeledSourceSpan,
-    report::Report, report_handler::ReportHandler, source_offset::SourceOffset,
-    source_span::SourceSpan,
+    named_source::NamedSource, report::Report, report_handler::ReportHandler,
+    source_code::SourceCode, source_offset::SourceOffset, source_span::SourceSpan,
 };
 
 pub type ByteOffset = usize;

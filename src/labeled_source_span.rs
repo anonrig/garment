@@ -13,4 +13,8 @@ impl LabeledSourceSpan {
     pub const fn new(label: Option<String>, offset: ByteOffset, len: usize) -> Self {
         Self { label, span: SourceSpan::new(SourceOffset::new(offset), SourceOffset::new(len)) }
     }
+
+    pub fn new_with_span(label: Option<String>, span: impl Into<SourceSpan>) -> Self {
+        Self { label, span: span.into() }
+    }
 }

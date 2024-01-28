@@ -1,7 +1,6 @@
 use crate::{LabeledSourceSpan, Severity};
 use std::{error::Error, fmt::Display};
 
-/// Ref: https://docs.rs/miette/latest/src/miette/protocol.rs.html#20-70
 pub trait Diagnostic: Error {
     /// A unique identifier/code for the error.
     fn code<'a>(&'a self) -> Option<Box<dyn Display + 'a>> {

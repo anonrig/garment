@@ -14,13 +14,13 @@ fn get_error() -> Report<TestError> {
 #[test]
 fn display() {
     let error = get_error();
-    assert_eq!(format!("{error}"), "TODO: fmt::Display")
+    assert_eq!(format!("{error}"), "TODO: fmt::Display");
 }
 
 #[test]
 fn debug() {
     let error = get_error();
-    assert_eq!(format!("{error:?}"), "TODO: fmt::Debug")
+    assert_eq!(format!("{error:?}"), "TODO: fmt::Debug");
 }
 
 #[test]

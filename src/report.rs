@@ -13,13 +13,14 @@ pub struct Report<D = Box<dyn Diagnostic>> {
 
 impl<D> Report<D>
 where
-    Report<D>: From<D>,
+    Self: From<D>,
 {
-    pub fn new(error: D) -> Report<D> {
+    pub fn new(error: D) -> Self {
         Self::from(error)
     }
 
     /// Provide source code for this error
+    #[must_use]
     pub fn with_source_code(mut self, source_code: impl SourceCode + 'static) -> Self {
         self.source_code.replace(Box::new(source_code));
         self
@@ -55,7 +56,7 @@ where
 
 impl<D> fmt::Debug for Report<D>
 where
-    Report<D>: fmt::Display,
+    Self: fmt::Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "TODO: fmt::Debug")

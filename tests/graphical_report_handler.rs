@@ -26,7 +26,7 @@ fn test() {
 
     let mut out = String::new();
     GraphicalReportHandler::new().render_report(&mut out, error.as_ref()).unwrap();
-    assert_eq!(&out, "severity:Error")
+    assert_eq!(&out, "severity:Error");
 }
 
 #[test]
@@ -45,13 +45,10 @@ fn external_source() {
         }
 
         fn labels(&self) -> Option<Box<dyn Iterator<Item = LabeledSourceSpan> + '_>> {
-            Some(Box::new(
-                [LabeledSourceSpan::new_with_span(
-                    Some("this bit here".into()),
-                    self.highlight.clone(),
-                )]
-                .into_iter(),
-            ))
+            Some(Box::new(std::iter::once(LabeledSourceSpan::new_with_span(
+                Some("this bit here".into()),
+                self.highlight.clone(),
+            ))))
         }
     }
 
@@ -59,8 +56,8 @@ fn external_source() {
     let err = Report::from(MyBad { highlight: SourceSpan::from((9, 4)) })
         .with_source_code(NamedSource::new("bad_file.rs", src));
     let out = format_report(err);
-    println!("Error: {}", out);
-    let expected = r#"oops::my::bad
+    println!("Error: {out}");
+    let expected = r"oops::my::bad
 
   × oops!
    ╭─[bad_file.rs:2:3]
@@ -71,7 +68,7 @@ fn external_source() {
  3 │     here
    ╰────
   help: try doing it better next time?
-"#
+"
     .trim_start()
     .to_string();
     assert_eq!(expected, out);

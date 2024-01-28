@@ -17,7 +17,7 @@ pub trait Diagnostic: Error {
         None
     }
 
-    /// Labels to apply to this `Diagnostic`'s [`Diagnostic::source_code`]
+    /// Labels to apply to this `Diagnostic`'s [`Diagnostic::code`]
     fn labels(&self) -> Option<Box<dyn Iterator<Item = LabeledSourceSpan> + '_>> {
         None
     }

@@ -22,11 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: true # Pull submodules for `cargo coverage`
 
-      - name: Install Rust Toolchain
-        uses: ./.github/actions/rustup
+      - uses: moonrepo/setup-rust@v1
+        with:
+          cache-base: main
 
       - name: Install cargo-llvm-cov
         uses: taiki-e/install-action@cargo-llvm-cov

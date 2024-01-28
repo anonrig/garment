@@ -6,10 +6,12 @@ use crate::Diagnostic;
 pub struct GraphicalReportHandler;
 
 impl GraphicalReportHandler {
-    pub fn new() -> Self {
+    #[must_use]
+    pub const fn new() -> Self {
         Self
     }
 
+    /// # Errors
     pub fn render_report(
         &self,
         f: &mut impl fmt::Write,

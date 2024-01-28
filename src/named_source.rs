@@ -19,10 +19,12 @@ impl NamedSource {
         Self { source: Box::new(source), name: name.as_ref().to_string() }
     }
 
+    #[must_use]
     pub fn name(&self) -> &str {
         &self.name
     }
 
+    #[must_use]
     pub fn inner(&self) -> &(dyn SourceCode + 'static) {
         &*self.source
     }

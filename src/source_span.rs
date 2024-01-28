@@ -9,6 +9,7 @@ pub struct SourceSpan {
 }
 
 impl SourceSpan {
+    #[must_use]
     pub const fn new(start: SourceOffset, length: SourceOffset) -> Self {
         Self { offset: start, length: length.offset() }
     }

@@ -10,6 +10,7 @@ pub struct LabeledSourceSpan {
 }
 
 impl LabeledSourceSpan {
+    #[must_use]
     pub const fn new(label: Option<String>, offset: ByteOffset, len: usize) -> Self {
         Self { label, span: SourceSpan::new(SourceOffset::new(offset), SourceOffset::new(len)) }
     }

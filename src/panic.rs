@@ -1,3 +1,3 @@
-pub fn set_panic_hook() {
-    // TODO(@anonrig): Implement this.
-}
+// pub fn set_panic_hook() {
+// TODO(@anonrig): Implement this.
+// }

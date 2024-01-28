@@ -6,9 +6,19 @@ version = 3
 name = "garment"
 version = "0.1.0"
 dependencies = [
+ "garment-derive",
  "serde",
  "serde_json",
  "thiserror",
+]
+
+[[package]]
+name = "garment-derive"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]

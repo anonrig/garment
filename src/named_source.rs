@@ -30,4 +30,6 @@ impl NamedSource {
     }
 }
 
-impl SourceCode for NamedSource {}
+impl SourceCode for NamedSource {
+    fn read_span(&self) {}
+}

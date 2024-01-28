@@ -6,17 +6,25 @@ repository = "https://github.com/anonrig/garment"
 version = "0.1.0"
 edition = "2021"
 
+[workspace]
+members = ["garment-derive"]
+
+[package.metadata.docs.rs]
+all-features = true
+
 [lints.clippy]
 all = { level = "warn" }
 nursery  = { level = "warn" }
 pedantic = { level = "warn" }
 
 [dependencies]
+garment-derive = { path = "garment-derive", version = "=0.1.0", optional = true }
 thiserror = "1.0.56"
 serde = { version = "1.0.195", features = ["derive"], optional = true }
 
 [dev-dependencies]
 serde_json = "1.0"
 
-[package.metadata.docs.rs]
-all-features = true
+[features]
+default = ["derive"]
+derive = ["garment-derive"]

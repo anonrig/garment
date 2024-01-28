@@ -13,6 +13,9 @@ mod source_span;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
+#[cfg(feature = "derive")]
+pub use garment_derive::*;
+
 pub use crate::{
     debug_report_handler::DebugReportHandler, diagnostic::Diagnostic,
     graphical_report_handler::GraphicalReportHandler, labeled_source_span::LabeledSourceSpan,

@@ -16,13 +16,6 @@ impl Report {
     pub fn new_boxed(diagnostic: Box<dyn Diagnostic + Send + Sync + 'static>) -> Self {
         Self { diagnostic, source_code: None }
     }
-
-    /// Provide source code for this error
-    #[must_use]
-    pub fn with_source_code(mut self, source_code: impl SourceCode + 'static) -> Self {
-        self.source_code.replace(Box::new(source_code));
-        self
-    }
 }
 
 impl<D> Report<D>
@@ -33,11 +26,25 @@ where
         Self::from(error)
     }
 
-    /// Provide source code for this error
     #[must_use]
     pub fn with_source_code(mut self, source_code: impl SourceCode + 'static) -> Self {
         self.source_code.replace(Box::new(source_code));
         self
+    }
+}
+
+impl From<Box<dyn Diagnostic + Send + Sync + 'static>> for Report {
+    fn from(diagnostic: Box<dyn Diagnostic + Send + Sync + 'static>) -> Self {
+        Self { diagnostic, source_code: None }
+    }
+}
+
+impl<D> From<D> for Report
+where
+    D: Diagnostic + Send + Sync + 'static,
+{
+    fn from(diagnostic: D) -> Self {
+        Self { diagnostic: Box::new(diagnostic), source_code: None }
     }
 }
 

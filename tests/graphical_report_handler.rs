@@ -53,7 +53,7 @@ fn external_source() {
     }
 
     let src = "source\n  text\n    here".to_string();
-    let err = Report::from(MyBad { highlight: SourceSpan::from((9, 4)) })
+    let err = Report::new(MyBad { highlight: SourceSpan::from((9, 4)) })
         .with_source_code(NamedSource::new("bad_file.rs", src));
     let out = format_report(err);
     println!("Error: {out}");

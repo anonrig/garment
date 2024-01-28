@@ -18,4 +18,23 @@ impl LabeledSourceSpan {
     pub fn new_with_span(label: Option<String>, span: impl Into<SourceSpan>) -> Self {
         Self { label, span: span.into() }
     }
+
+    pub fn at(span: impl Into<SourceSpan>, label: impl Into<String>) -> Self {
+        Self::new_with_span(Some(label.into()), span)
+    }
+
+    #[must_use]
+    pub const fn offset(&self) -> usize {
+        self.span.offset()
+    }
+
+    #[must_use]
+    pub const fn len(&self) -> usize {
+        self.span.len()
+    }
+
+    #[must_use]
+    pub const fn is_empty(&self) -> bool {
+        self.span.is_empty()
+    }
 }
